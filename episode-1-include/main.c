@@ -5,11 +5,12 @@
  * another file into this one, before the compiler does anything else.
  * "stm32f0xx_hal.h" contains the DEFINITIONS for things like
  * GPIO_InitTypeDef, HAL_GPIO_WritePin, GPIO_PIN_4 - without it, this
- * file doesn't know those words exist at all.
- *
+ * file doesn't know those words exist at all. Removing the line below
+ * causes a build failure, since none of those names would be defined
+ * anywhere the compiler can find.
  */
 
-#include "stm32f0xx_hal.h"   // <-- comment this line out and rebuild to see it fail
+#include "stm32f0xx_hal.h"
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
