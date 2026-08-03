@@ -7,11 +7,6 @@
  * GPIO_InitTypeDef, HAL_GPIO_WritePin, GPIO_PIN_4 - without it, this
  * file doesn't know those words exist at all.
  *
- * TRY THIS ON CAMERA: comment out the #include line below, try to
- * build. The compiler will fail with errors like "unknown type name
- * GPIO_InitTypeDef" - proof that the include is what taught the
- * compiler those words in the first place. Then uncomment it, rebuild,
- * and the LED blinks.
  */
 
 #include "stm32f0xx_hal.h"   // <-- comment this line out and rebuild to see it fail
