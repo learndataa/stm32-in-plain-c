@@ -28,17 +28,42 @@ Every example in this series targets the same board used throughout Hardware Con
 
 - **MCU**: STM32F051C8T6
 - **Programmer/debugger**: ST-Link V2
-- **Toolchain**: STM32 HAL library, hand-written `main.c` (no CubeMX-generated boilerplate — every line in every example is there for a reason, not auto-generated)
+- **Toolchain**: PlatformIO (VS Code), STM32 HAL library, hand-written `main.c` (no CubeMX-generated boilerplate — every line in every example is there for a reason, not auto-generated)
 
 Most episodes only need the board itself and a single LED (the one already wired for earlier episodes works fine). A few later episodes may reuse the potentiometer setup from Hardware Conversations — noted per-episode where relevant.
 
-## How to build and flash an example
+## Toolchain: PlatformIO (VS Code)
+
+Every example in this series is built and flashed using **PlatformIO** in VS Code.
+
+### One-time project setup
+
+1. Install the [PlatformIO IDE extension](https://platformio.org/) in VS Code.
+2. Open PlatformIO Home → **New Project**.
+3. Board: search for and select **ST STM32F0DISCOVERY** (PlatformIO ID: `disco_f051r8`). No PlatformIO board definition exactly matches a bare STM32F051C8T6, so this is used as the closest template — same F051 subfamily, same 64KB flash / 8KB RAM. The `board_build.mcu` override below points the actual build at the real chip.
+4. Framework: **STM32Cube**.
+5. Once the project is created, replace the generated `platformio.ini` with:
+
+```ini
+[env:disco_f051r8]
+platform = ststm32
+board = disco_f051r8
+framework = stm32cube
+board_build.mcu = stm32f051c8tx
+board_upload.maximum_size = 65536
+board_upload.maximum_ram_size = 8192
+upload_protocol = stlink
+debug_tool = stlink
+build_src_filter = +<*> +<../src/main.c>
+```
+
+### Building and flashing an example
 
 1. Open the episode folder you want (see episode list below).
-2. Copy `main.c` into your STM32 project, replacing the existing `main.c`.
-3. Build with your usual toolchain (STM32CubeIDE, Makefile + arm-none-eabi-gcc, or your preferred setup).
-4. Flash via ST-Link.
-5. Each `main.c` is heavily commented — read the top comment block first, it explains what the example proves and (where relevant) what to break on purpose to see the concept in action.
+2. Copy that episode's `main.c` into your project's `src/main.c`, replacing whatever is there.
+3. Build: click the **checkmark icon** in the bottom status bar (or the PlatformIO icon in the Activity Bar → Build).
+4. Flash: click the **right-arrow (Upload) icon** in the bottom status bar, with your ST-Link connected.
+5. Each `main.c` is heavily commented — the top comment block explains what the example demonstrates.
 
 No two examples require different wiring unless explicitly noted in that episode's folder.
 
