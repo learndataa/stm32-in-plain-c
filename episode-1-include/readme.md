@@ -1,6 +1,6 @@
 # Episode 1: `#include`
 
-**Video:** _(add link once published)_
+**Video:** 
 
 ## The idea
 `#include` isn't magic — it copies the contents of another file into
