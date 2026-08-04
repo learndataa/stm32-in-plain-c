@@ -86,8 +86,7 @@ BSP_LED_Off();
 BSP_LED_Toggle();
 ```
 
-Copy `lib/bsp/` into your project once, alongside whichever episode's
-`main.c` you're building.
+Copy `lib/bsp/` into your project once, alongside whichever episode's `main.c` you're building.
 
 ---
 
@@ -98,17 +97,18 @@ Each folder contains that episode's `main.c` and a short `README.md` with the vi
 | # | Episode | Concept | Folder |
 |---|---|---|---|
 | 1 | Why Every STM32 Program Starts With This One Line | `#include` | [`episode-1-include/`](./episode-1-include) |
-| 2 | Why C Makes You Choose the Size of a Number | Fixed-width types (`uint8_t`, `uint16_t`, `uint32_t`) | `episode-2-fixed-width-types/` |
-| 3 | Every HAL Call Returns Something | Functions & return values | `episode-3-functions-return-values/` |
-| 4 | The Loop That Never Ends (On Purpose) | `if/else`, `while(1)` | `episode-4-control-flow/` |
-| 5 | One Box, Many Settings | Structs | `episode-5-structs/` |
-| 6 | Why We Pass `&hadc1`, Not `hadc1` | Pointers and `&` | `episode-6-pointers/` |
-| 7 | `GPIO_PIN_4` Isn't Magic | Enums / named constants | `episode-7-enums/` |
-| 8 | Why `ADC_HandleTypeDef` Has Such a Long Name | Typedefs | `episode-8-typedefs/` |
-| 9 | The Function That Isn't a Function | Macros / `#define` | `episode-9-macros/` |
-| 10 | The Variable That Remembers | `static` | `episode-10-static/` |
-| 11 | Why We Say `volatile` | `volatile` | `episode-11-volatile/` |
-| 12 | Read Your Own main.c, Line by Line | Putting it all together | `episode-12-putting-it-together/` |
+| 2 | Every Program Starts Here | `int main(void)` and `{ }` | `episode-2-main-function/` |
+| 3 | Why C Makes You Choose the Size of a Number | Fixed-width types (`uint8_t`, `uint16_t`, `uint32_t`) | `episode-3-fixed-width-types/` |
+| 4 | Every HAL Call Returns Something | Functions & return values | `episode-4-functions-return-values/` |
+| 5 | The Loop That Never Ends (On Purpose) | `if/else`, `while(1)` | `episode-5-control-flow/` |
+| 6 | One Box, Many Settings | Structs | `episode-6-structs/` |
+| 7 | Why We Pass `&hadc1`, Not `hadc1` | Pointers and `&` | `episode-7-pointers/` |
+| 8 | `GPIO_PIN_4` Isn't Magic | Enums / named constants | `episode-8-enums/` |
+| 9 | Why `ADC_HandleTypeDef` Has Such a Long Name | Typedefs | `episode-9-typedefs/` |
+| 10 | The Function That Isn't a Function | Macros / `#define` | `episode-10-macros/` |
+| 11 | The Variable That Remembers | `static` | `episode-11-static/` |
+| 12 | Why We Say `volatile` | `volatile` | `episode-12-volatile/` |
+| 13 | Read Your Own main.c, Line by Line | Putting it all together | `episode-13-putting-it-together/` |
 
 Folders for unreleased episodes will be added as each video goes live. This table is the roadmap — check back for links as episodes publish.
 
