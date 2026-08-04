@@ -67,6 +67,28 @@ build_src_filter = +<*> +<../src/main.c>
 
 No two examples require different wiring unless explicitly noted in that episode's folder.
 
+## Shared setup code (`lib/bsp/`)
+
+Every episode's `main.c` is kept deliberately short — a handful of
+lines, focused on just that episode's concept. The repeated boilerplate
+every episode would otherwise need (clock configuration, LED pin setup,
+the SysTick handler) lives once in `lib/bsp/bsp.c` and `lib/bsp/bsp.h`,
+and PlatformIO compiles it automatically as part of the build.
+
+Each episode's `main.c` calls into it:
+
+```c
+#include "bsp.h"
+
+BSP_Init();        // HAL_Init + clock config + LED pin setup
+BSP_LED_On();
+BSP_LED_Off();
+BSP_LED_Toggle();
+```
+
+Copy `lib/bsp/` into your project once, alongside whichever episode's
+`main.c` you're building.
+
 ---
 
 ## Episode list (Tier 1: Foundations)
