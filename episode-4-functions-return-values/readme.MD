@@ -1,6 +1,12 @@
 # Episode 4: Functions & Return Values
 
-**Video:** 
+**Video:** _(add link once published)_
+
+> **This episode needs the board connected and flashed** - unlike
+> episodes 1-3, the proof here is behavioral, not a build message. If
+> you haven't wired up your STM32 + ST-Link yet, see the
+> [Hardware setup section](../README.md#hardware-setup-read-this-first-if-youre-new-here)
+> in the root README first.
 
 ## The idea
 Every HAL function returns a `HAL_StatusTypeDef` - `HAL_OK` if it
