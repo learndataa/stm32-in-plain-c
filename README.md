@@ -47,18 +47,26 @@ The connection between the STM32, the ST-Link, and your laptop is
 **identical across every episode in both series** - only the small
 circuit around it (an LED, a potentiometer, etc.) changes per episode.
 
-![STM32 to ST-Link to laptop wiring diagram](./docs/swd-wiring-diagram.png)
+Wire by your board's own printed pin labels (silkscreen), not by
+assumed GPIO numbers - board layouts vary, and the labels printed on
+the PCB are always correct for that specific board:
 
-| ST-Link pin | STM32 pin | Purpose |
+| ST-Link pin | STM32 board pin | Purpose |
 |---|---|---|
-| SWDIO | PA13 | Data line |
-| SWCLK | PA14 | Clock line |
+| SWCLK (or CLK) | CLK | Clock line |
+| SWDIO (or DAT) | DAT | Data line |
 | GND | GND | Common ground |
-| 3.3V | VDD | Powers the chip from the ST-Link |
+| 3V3 | 3.3V | Powers the chip from the ST-Link |
+| **RST** | **NRST** | **Reset line - required, see note below** |
 
-Then a single USB cable connects the ST-Link to your laptop. An
-optional 5th wire (NRST, reset) exists but isn't required for
-anything in this series.
+Then a single USB cable connects the ST-Link to your laptop.
+
+**NRST is required, not optional.** Some board/tool combinations
+(confirmed on the `disco_f051r8` PlatformIO board profile used in
+this series) fail to upload without it - OpenOCD expects a hardware
+reset line by default, and without one connected, upload fails with
+`Unable to reset target` / `timed out while waiting for target halted`.
+Wire ST-Link `RST` → STM32 `NRST` from the start to avoid this.
 
 ## Toolchain: PlatformIO (VS Code)
 
