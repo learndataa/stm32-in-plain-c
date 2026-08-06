@@ -1,7 +1,6 @@
 # Episode 4: Functions & Return Values
 
-**Video:** _(add link once published)_
-
+**Video:** _
 > **This episode needs the board connected and flashed** - unlike
 > episodes 1-3, the proof here is behavioral, not a build message. If
 > you haven't wired up your STM32 + ST-Link yet, see the
@@ -39,5 +38,57 @@ back via its return value either way.
    time it actually succeeded.
 
 ## Wiring
-Same single-LED setup as earlier episodes:
-PA4 → 220Ω resistor → LED anode, LED cathode → GND.
+
+### Programming connection (STM32 ↔ ST-Link)
+Same as every episode - see the root README's
+[Hardware setup section](../README.md#hardware-setup-read-this-first-if-youre-new-here)
+for the full table. Confirmed required for this board/tool combo:
+
+| ST-Link pin | STM32 board pin |
+|---|---|
+| SWCLK (CLK) | CLK |
+| SWDIO (DAT) | DAT |
+| GND | GND |
+| 3V3 | 3.3V |
+| **RST** | **NRST** |
+
+**NRST is required**, not optional - without it, upload fails with
+`Unable to reset target`. See the root README for details.
+
+### LED circuit (what this episode actually uses)
+```
+PA4 → 220Ω resistor → LED anode
+LED cathode → GND (breadboard -ve rail)
+```
+This is the only circuit `main.c`/`bsp.c` in this episode reads or
+writes. Nothing else needs to be connected for this episode's demo
+to work.
+
+### Optional: UART wiring (not used by this episode)
+If you're also wiring ahead for a future UART/serial episode, this is
+unrelated to episode 4 and safe to leave connected or disconnected -
+it has no effect on this episode's behavior either way:
+
+```
+STM32 TX (board's own TX pin, per its silkscreen) → ST-Link RX
+```
+Direction matters: STM32 transmits, so its TX line goes to the
+ST-Link's RX line, not the other way around. Confirmed working when
+using the board's own printed `TX` pin - not confirmed on PA6, which
+does not appear to be a documented USART pin on this chip family.
+
+## Troubleshooting notes (from real testing)
+
+- **Flashing succeeds but the LED does nothing at all**: check the
+  `BOOT0` jumper is set to `GND`, not `VCC`. Wrong position boots
+  into the chip's system bootloader instead of running your flashed
+  code - upload still reports success either way, so this is easy to
+  miss.
+- **Upload fails with `Unable to reset target`**: NRST isn't wired.
+  See the programming connection table above.
+- **Flashing succeeds, behavior doesn't match what you expect**:
+  double check your terminal is in the correct PlatformIO project
+  folder (`stm32_in_plain_c`, not a different project) before
+  running the upload command - the project name shown in the build
+  log's `Dependency Graph` / board line confirms which project just
+  got flashed.
