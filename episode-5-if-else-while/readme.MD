@@ -1,6 +1,7 @@
 # Episode 5: The Loop That Never Ends (On Purpose)
 
-**Video:** 
+**Video:** _(add link once published)_
+
 > This episode needs the board connected and flashed - the proof is
 > behavioral. See the
 > [Hardware setup section](../README.md#hardware-setup-read-this-first-if-youre-new-here)
@@ -28,12 +29,13 @@ program alive and running, deliberately, permanently.
    blinks 10 times before going solid, proving the `if` condition is
    genuinely controlling the branch, not just decorative.
 
-   **Note:** an earlier version of this file counted raw toggles
-   instead of completed on-off cycles, which made the visible blink
-   count not match the number in the code (a toggle flips the LED
-   once, but a human-visible "blink" needs two toggles - on, then
-   off). This version tracks `blinks_done` correctly, so the number
-   you set is the number of blinks you'll actually see.
+   **Note:** an earlier version of this file incremented the counter
+   on the OFF transition, which meant the final "stay solid" call in
+   the else branch created one extra, genuinely visible turn-on event
+   - N blinks in the code produced N+1 visible blinks. This version
+   counts on the ON transition instead, so the Nth turn-on IS blink N,
+   and the final else branch lands on an LED that's already lit -
+   no phantom extra blink.
 
 ## Why the outer `while(1)` can't be removed
 If you deleted the outer `while(1)` and just let the `if/else` run
