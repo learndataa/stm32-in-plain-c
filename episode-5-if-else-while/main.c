@@ -7,9 +7,10 @@
  * main is never allowed to actually finish. while(1) is what keeps
  * it running, deliberately, forever.
  *
- * This program counts 5 blinks, then switches to the else branch and
- * stays there - solid on, forever. The program never stops running.
- * It just keeps re-checking a condition that's now permanently false.
+ * This program blinks 5 times, then switches to the else branch and
+ * stays there - solid on, forever. blinks_done only increments once
+ * per COMPLETED on-off cycle, not per toggle - a toggle alone flips
+ * the state, but two toggles (on, then off) make one visible blink.
  */
 
 #include "bsp.h"
@@ -18,18 +19,28 @@ int main(void)
 {
   BSP_Init();
 
-  uint8_t blink_count = 0;
+  uint8_t blinks_done = 0;
+  uint8_t led_is_on = 0;
 
   while (1)
   {
-    if (blink_count < 5)
+    if (blinks_done < 5)
     {
-      BSP_LED_Toggle();
-      blink_count++;
+      if (led_is_on)
+      {
+        BSP_LED_Off();
+        led_is_on = 0;
+        blinks_done++; // one full on-off cycle just completed
+      }
+      else
+      {
+        BSP_LED_On();
+        led_is_on = 1;
+      }
     }
     else
     {
-      BSP_LED_On(); // done counting - stays here, solid, forever
+      BSP_LED_On(); // done blinking - stays here, solid, forever
     }
 
     HAL_Delay(500);
