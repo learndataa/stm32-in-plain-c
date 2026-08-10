@@ -33,7 +33,7 @@ register - `GPIO_PIN_4` selects bit 4). Different mechanism under the
 hood than our `BlinkSpeed` enum, same underlying idea: a name
 standing in for a number.
 
-![Simplified STM32 chip outline with pins on four sides](./docs/stm32-simplified-pins.png)
+![Simplified STM32 chip outline with pins on four sides](../docs/stm32-simplified-pins.png)
 
 This is a simplified illustration, not the real pinout - it shows 6
 example pins per side to stay legible. In reality, the STM32F051C8T6
